@@ -1,0 +1,74 @@
+### 채팅방 생성
+POST http://localhost:8080/api/rooms
+Content-Type: application/json
+
+{
+  "ownerId": 1,
+  "title": "테스트 방",
+  "durationMinutes": 3
+}
+
+### 채팅방 참가
+POST http://localhost:8080/api/rooms/9/join
+Content-Type: application/json
+
+{
+  "userId": 2
+}
+
+### 채팅방 목록 조회
+GET http://localhost:8080/api/rooms
+
+
+### 채팅방 단건 조회
+GET http://localhost:8080/api/rooms/5
+
+### 채팅방 메시지 조회
+GET http://localhost:8080/api/rooms/5/messages
+
+
+var socket1 = new WebSocket("ws://localhost:8080/ws/chat?roomId=6&userId=1");
+
+socket1.onopen = () => console.log("user1 연결됨");
+socket1.onmessage = (event) => console.log("user1 받은 메시지:", event.data);
+socket1.onclose = (event) => console.log("user1 연결 종료", event.code, event.reason);
+socket1.onerror = (error) => console.log("user1 에러:", error);
+
+
+socket1.send(JSON.stringify({
+  roomId: 6,
+  senderId: 1,
+  content: "Redis 저장 테스트"
+}));
+
+### 만료 테스트용 채팅방 생성
+POST http://localhost:8080/api/rooms
+Content-Type: application/json
+
+{
+  "ownerId": 1,
+  "title": "만료 테스트 방",
+  "durationMinutes": 1
+}
+
+### 채팅방 단건 조회
+GET http://localhost:8080/api/rooms/8
+
+### 채팅방 생성
+POST http://localhost:8080/api/rooms
+Content-Type: application/json
+
+{
+  "ownerId": 1,
+  "title": "Redis 삭제 테스트 방",
+  "durationMinutes": 5
+}
+
+### inviteCode로 입장
+POST /api/rooms/join-by-code
+Content-Type: application/json
+
+{
+  "inviteCode": "A8F3Q2ZK",
+  "userId": 2
+}

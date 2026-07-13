@@ -1,0 +1,17 @@
+### 회원가입
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+
+{
+  "loginId": "user2",
+  "password": "1234"
+}
+
+### 로그인
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "loginId": "user2",
+  "password": "1234"
+}

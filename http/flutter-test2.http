@@ -1,0 +1,81 @@
+### 1. 회원가입 - user1
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+
+{
+  "loginId": "flutteruser1",
+  "password": "1234"
+}
+
+### 2. 회원가입 - user2
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+
+{
+  "loginId": "flutteruser2",
+  "password": "1234"
+}
+
+### 3. 로그인 - user1
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "loginId": "flutteruser1",
+  "password": "1234"
+}
+
+### 4. 로그인 - user2
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "loginId": "flutteruser2",
+  "password": "1234"
+}
+
+### 5. 채팅방 생성
+POST http://localhost:8080/api/rooms
+Content-Type: application/json
+
+{
+  "ownerId": 1,
+  "title": "Flutter 테스트 방",
+  "durationMinutes": 60
+}
+
+### 6. 보안 코드로 채팅방 입장
+POST http://localhost:8080/api/rooms/join-by-code
+Content-Type: application/json
+
+{
+  "inviteCode": "여기에_방생성_응답_inviteCode",
+  "userId": 2
+}
+
+### 7. 채팅방 목록 조회
+GET http://localhost:8080/api/rooms
+
+### 8. 채팅방 단건 조회
+GET http://localhost:8080/api/rooms/1
+
+### 9. 이전 메시지 조회
+GET http://localhost:8080/api/rooms/1/messages
+
+### 내가 참가한 채팅방 목록 조회
+GET http://localhost:8080/api/rooms/my?userId=1
+
+### 채팅방 나가기
+DELETE http://localhost:8080/api/rooms/1/members?userId=2
+
+### 내가 참가한 채팅방 목록 조회
+GET http://localhost:8080/api/rooms/my?userId=2
+
+### 권한 없는 유저 메시지 조회
+GET http://localhost:8080/api/rooms/1/messages?userId=2
+
+### 채팅방 입장 정보 + 이전 메시지 조회
+GET http://localhost:8080/api/rooms/1/enter?userId=1
+
+###
+GET http://localhost:8080/api/rooms/1/enter?userId=2
